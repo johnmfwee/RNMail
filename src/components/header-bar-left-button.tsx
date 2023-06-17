@@ -28,8 +28,8 @@ const HeaderBarLeftButton: React.FC<Props> = props => {
       transform: [
         { rotateZ: withTiming(backButtonVisible ? `0deg` : `180deg`) }
       ],
-      opacity: withTiming(backButtonVisible ? 0 : 1, {
-        easing: Easing.out(Easing.quad)
+      opacity: withTiming(backButtonVisible ? 1 : 0, {
+        easing: Easing.in(Easing.quad)
       })
     }),
     [backButtonVisible]

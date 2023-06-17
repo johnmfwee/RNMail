@@ -14,6 +14,7 @@ import { Theme } from '@/themes'
 type Props = AnimatedBoxProps & {
   onSidebarToggle: () => any
 }
+
 const HeaderBar: React.FC<Props> = props => {
   const { onSidebarToggle, ...rest } = props
   const safeAreaInsets = useSafeAreaInsets()
@@ -46,16 +47,21 @@ const HeaderBar: React.FC<Props> = props => {
     }
   }, [searchInputHasFocus, onSidebarToggle])
 
-  const safeAreaStyle = useAnimatedStyle(() => ({
-    opacity: withTiming(searchInputHasFocus ? 1 : 0)
-  }), [searchInputHasFocus])
-
-  const barStyle = useAnimatedStyle(() => ({
-    marginHorizontal: withTiming(searchInputHasFocus ? 0 : theme.spacing.lg),
-    borderRadius: withTiming(searchInputHasFocus ? 0 : theme.borderRadii.md, {
-      duration: 600
-    })
-  }), [searchInputHasFocus])
+  const safeAreaStyle = useAnimatedStyle(
+    () => ({
+      opacity: withTiming(searchInputHasFocus ? 1 : 0)
+    }),
+    [searchInputHasFocus]
+  )
+  const barStyle = useAnimatedStyle(
+    () => ({
+      marginHorizontal: withTiming(searchInputHasFocus ? 0 : theme.spacing.lg),
+      borderRadius: withTiming(searchInputHasFocus ? 0 : theme.borderRadii.md, {
+        duration: 600
+      })
+    }),
+    [searchInputHasFocus]
+  )
 
   return (
     <AnimatedBox position="absolute" top={0} left={0} right={0} {...rest}>
@@ -76,38 +82,39 @@ const HeaderBar: React.FC<Props> = props => {
         px="sm"
         minHeight={44}
         bg="$headerBarBackground"
-      style={barStyle}
+        style={barStyle}
       >
-      <HeaderBarLeftButton
-        onPress={handleLeftButtonPress}
-        backButtonVisible={searchInputHasFocus}
-      />
-      <TextInput
-        ref={refSearchInput}
-        flex={1}
-        ml="sm"
-        fontSize={18}
-        autoCapitalize="none"
-        color="$foreground"
-        placeholder="Search Notes"
-        placeholderColor="$fieldInputPlaceholderTextColor"
-        value={searchQuery}
-        onFocus={handleSearchInputFocus}
-        onBlur={handleSearchInputBlur}
-        onChangeText={setSearchQuery}
-      />
-      {searchQuery.length > 0 && (
-        <TouchableOpacity
-          m="xs"
-          p="xs"
-          rippleBorderless
-          onPress={handleClearButtonPress}
-        >
-          <FeatherIcon name="x" size={22} />
-        </TouchableOpacity>
-      )}
+        <HeaderBarLeftButton
+          onPress={handleLeftButtonPress}
+          backButtonVisible={searchInputHasFocus}
+        />
+        <TextInput
+          ref={refSearchInput}
+          flex={1}
+          ml="sm"
+          fontSize={18}
+          autoCapitalize="none"
+          color="$foreground"
+          placeholder="Search notes"
+          placeholderColor="$fieldInputPlaceholderTextColor"
+          value={searchQuery}
+          onFocus={handleSearchInputFocus}
+          onBlur={handleSearchInputBlur}
+          onChangeText={setSearchQuery}
+        />
+        {searchQuery.length > 0 && (
+          <TouchableOpacity
+            m="xs"
+            p="xs"
+            rippleBorderless
+            onPress={handleClearButtonPress}
+          >
+            <FeatherIcon name="x" size={22} />
+          </TouchableOpacity>
+        )}
+      </AnimatedBox>
     </AnimatedBox>
-    </AnimatedBox >
   )
 }
+
 export default HeaderBar
