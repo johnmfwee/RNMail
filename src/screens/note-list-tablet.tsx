@@ -5,7 +5,7 @@ import { DrawerNavigationProp } from '@react-navigation/drawer'
 import { CompositeNavigationProp } from '@react-navigation/native'
 import { NativeStackNavigationProp } from '@react-navigation/native-stack'
 import { useSetAtom } from 'jotai'
-import React, { useCallback } from 'react'
+import React, { memo, useCallback } from 'react'
 import NoteListScreen from './note-list'
 
 type Props = {
@@ -16,7 +16,7 @@ type Props = {
   onSidebarToggle: () => any
 }
 
-const NoteListScreenForTablet: React.FC<Props> = props => {
+const NoteListScreenForTablet: React.FC<Props> = memo(props => {
   const { navigation, onSidebarToggle } = props
   const setEditingNoteId = useSetAtom(editingNoteIdAtom)
   const { isPortrait } = useResponsiveLayout()
@@ -38,6 +38,6 @@ const NoteListScreenForTablet: React.FC<Props> = props => {
       onNoteSelect={handleNoteListItemPress}
     />
   )
-}
+})
 
 export default NoteListScreenForTablet
