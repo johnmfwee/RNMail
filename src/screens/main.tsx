@@ -16,9 +16,9 @@ type Props = CompositeScreenProps<
 export default function MainScreen(props: Props) {
   return (
     <Container>
-      <ResponsiveLayout 
-        renderOnPhone={<MainScreenForPhone {...props} />}
-        renderOnTablet={<MainScreenForTablet {...props} />}
+      <ResponsiveLayout
+        renderOnPhone={() => <MainScreenForPhone {...props} />}
+        renderOnTablet={() => <MainScreenForTablet {...props} />}
       />
     </Container>
   )
