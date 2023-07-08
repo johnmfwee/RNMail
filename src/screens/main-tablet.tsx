@@ -19,7 +19,7 @@ export default function MainScreenForTablet({ navigation }: Props) {
     // TODO
   }, [])
 
-  const leftViewVisisble = !isPortrait
+  const leftViewVisible = !isPortrait
 
   return (
     <ThreeColumnLayout
@@ -31,7 +31,7 @@ export default function MainScreenForTablet({ navigation }: Props) {
         />
       )}
       renderRightView={() => <Box flex={1} bg="blue" />}
-      leftViewVisible={leftViewVisisble}
+      leftViewVisible={leftViewVisible}
     />
   )
 }
